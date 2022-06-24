@@ -248,7 +248,7 @@ install(FILES ${OGRE_BINARY_DIR}/include/OgreBuildSettings.h DESTINATION include
 
 
 # Create the pkg-config package files on Unix systems
-if (UNIX)
+#if (UNIX)
   set(OGRE_LIB_SUFFIX "")
   set(OGRE_PLUGIN_PREFIX "")
   set(OGRE_PLUGIN_EXT ".so")
@@ -260,6 +260,12 @@ if (UNIX)
   endif ()
   if (OGRE_BUILD_TYPE STREQUAL "debug")
     set(OGRE_LIB_SUFFIX "${OGRE_LIB_SUFFIX}_d")
+  endif ()
+
+  if (WIN32)
+    set(OGRE_PLUGIN_DIRECTORY bin)
+  else ()
+    set(OGRE_PLUGIN_DIRECTORY $OGRE_LIB_DIRECTORY)
   endif ()
 
   set(OGRE_ADDITIONAL_LIBS "")
@@ -275,58 +281,58 @@ if (UNIX)
     endif ()
     # there is no pkgconfig file for freeimage, so we need to add that lib manually
     set(OGRE_ADDITIONAL_LIBS "${OGRE_ADDITIONAL_LIBS} -lfreeimage")
-    configure_file(${OGRE_TEMPLATES_DIR}/OGREStatic.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE.pc @ONLY)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGREStatic.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next.pc @ONLY)
   else ()
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE.pc @ONLY)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next.pc @ONLY)
   endif ()
-  install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+  install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
 
   # configure additional packages
 
   if (OGRE_BUILD_COMPONENT_PAGING)
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Paging.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Paging.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Paging.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Paging.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Paging.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Paging.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
 
   if (OGRE_BUILD_COMPONENT_MESHLODGENERATOR)
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-MeshLodGenerator.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-MeshLodGenerator.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-MeshLodGenerator.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-MeshLodGenerator.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-MeshLodGenerator.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-MeshLodGenerator.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
   
   if (OGRE_BUILD_COMPONENT_TERRAIN)
     if (OGRE_BUILD_COMPONENT_PAGING)
-      set(OGRE_PAGING_ADDITIONAL_PACKAGES ", OGRE-Paging = ${OGRE_VERSION}")
+      set(OGRE_PAGING_ADDITIONAL_PACKAGES ", OGRE-Next-Paging = ${OGRE_VERSION}")
     endif ()
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Terrain.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Terrain.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Terrain.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Terrain.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Terrain.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Terrain.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
 
   if (OGRE_BUILD_COMPONENT_RTSHADERSYSTEM)
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-RTShaderSystem.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-RTShaderSystem.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-RTShaderSystem.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-RTShaderSystem.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-RTShaderSystem.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-RTShaderSystem.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
 
   if (OGRE_BUILD_COMPONENT_PROPERTY)
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Property.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Property.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Property.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Property.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Property.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Property.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
 
   if (OGRE_BUILD_COMPONENT_OVERLAY)
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Overlay.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Overlay.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Overlay.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Overlay.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Overlay.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Overlay.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
 
   if (OGRE_BUILD_COMPONENT_VOLUME)
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Volume.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Volume.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Volume.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Volume.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Volume.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Volume.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
 
   if (OGRE_BUILD_COMPONENT_HLMS)
-    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Hlms.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Hlms.pc @ONLY)
-    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Hlms.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
+    configure_file(${OGRE_TEMPLATES_DIR}/OGRE-Hlms.pc.in ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Hlms.pc @ONLY)
+    install(FILES ${OGRE_BINARY_DIR}/pkgconfig/OGRE-Next-Hlms.pc DESTINATION ${OGRE_LIB_DIRECTORY}/pkgconfig)
   endif ()
 
-endif ()
+# endif ()
 
 if(OGRE_CONFIG_STATIC_LINK_CRT)
 #We statically link to reduce dependencies

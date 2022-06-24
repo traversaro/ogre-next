@@ -3,9 +3,9 @@ exec_prefix=${prefix}
 libdir=${prefix}/@OGRE_LIB_DIRECTORY@
 includedir=${prefix}/include
 
-Name: OGRE-MeshLodGenerator
+Name: OGRE-Next-MeshLodGenerator
 Description: Mesh Lod Generator for OGRE
 Version: @OGRE_VERSION@
-Requires: OGRE = @OGRE_VERSION@
-Libs: -L${libdir} -lOgreMeshLodGenerator@OGRE_LIB_SUFFIX@
-Cflags: -I${includedir}/OGRE/MeshLodGenerator @OGRE_CFLAGS@
+Requires: OGRE-Next = @OGRE_VERSION@
+Libs: -L${libdir} -lOgreNextMeshLodGenerator@OGRE_LIB_SUFFIX@
+Cflags: -I${includedir}/OGRE-Next/MeshLodGenerator @OGRE_CFLAGS@
