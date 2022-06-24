@@ -24,5 +24,5 @@ ogre_config_framework(OgreHlmsUnlitMobile)
 ogre_config_component(OgreHlmsUnlitMobile)
 
 install(FILES ${HEADER_FILES}
-  DESTINATION include/OGRE/Hlms/UnlitMobile
+  DESTINATION include/OGRE-Next/Hlms/UnlitMobile
 )
