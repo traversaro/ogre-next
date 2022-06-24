@@ -710,7 +710,7 @@ if (OGRE_INSTALL_SAMPLES OR OGRE_INSTALL_SAMPLES_SOURCE)
 endif ()
 
 # Install CMake modules
-add_subdirectory(CMake)
+# add_subdirectory(CMake)
 
 # provide option to install dependencies on Windows
 include(InstallDependencies)
