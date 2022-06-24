@@ -52,12 +52,12 @@ ogre_config_framework(OgreHlmsPbs)
 ogre_config_component(OgreHlmsPbs)
 
 install (DIRECTORY include/
-        DESTINATION include/OGRE/Hlms/Pbs
+        DESTINATION include/OGRE-Next/Hlms/Pbs
         FILES_MATCHING PATTERN "*.h"
         )
 
 # also install HLMS Common folder
 install (DIRECTORY ../Common/include/
-        DESTINATION include/OGRE/Hlms/Common
+        DESTINATION include/OGRE-Next/Hlms/Common
         FILES_MATCHING PATTERN "*.h" PATTERN "*.inl"
         )

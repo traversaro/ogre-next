@@ -31,5 +31,5 @@ ogre_config_framework(OgrePlanarReflections)
 ogre_config_component(OgrePlanarReflections)
 
 install(FILES ${HEADER_FILES}
-  DESTINATION include/OGRE/PlanarReflections
+  DESTINATION include/OGRE-Next/PlanarReflections
 )
