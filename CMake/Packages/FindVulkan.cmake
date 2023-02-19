@@ -152,13 +152,17 @@ else()
 		)
 endif()
 
-set(Vulkan_LIBRARIES ${Vulkan_LIBRARY} optimized ${Vulkan_SHADERC_LIB_REL} debug ${Vulkan_SHADERC_LIB_DBG})
-set(Vulkan_INCLUDE_DIRS ${Vulkan_INCLUDE_DIR} ${Vulkan_SHADERC_INCLUDE_DIR})
+if(Vulkan_SHADERC_LIB_REL AND Vulkan_SHADERC_LIB_DBG)
+  set(Vulkan_LIBRARIES ${Vulkan_LIBRARY} optimized ${Vulkan_SHADERC_LIB_REL} debug ${Vulkan_SHADERC_LIB_DBG})
+endif()
+if(Vulkan_SHADERC_INCLUDE_DIR)
+  set(Vulkan_INCLUDE_DIRS ${Vulkan_INCLUDE_DIR} ${Vulkan_SHADERC_INCLUDE_DIR})
+endif()
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(Vulkan
   DEFAULT_MSG
-  Vulkan_LIBRARY Vulkan_SHADERC_LIB_REL Vulkan_SHADERC_LIB_DBG Vulkan_INCLUDE_DIR)
+  Vulkan_LIBRARY Vulkan_INCLUDE_DIR)
 
 mark_as_advanced(Vulkan_INCLUDE_DIR Vulkan_LIBRARY Vulkan_SHADERC_INCLUDE_DIR Vulkan_SHADERC_LIB_REL Vulkan_SHADERC_LIB_DBG Vulkan_GLSLC_EXECUTABLE)
 
